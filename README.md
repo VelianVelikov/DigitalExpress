@@ -4,6 +4,10 @@
 
 A bank account may have more than one card to access it. Banks normally have multiple ATMs to access accounts. This presents a problem where the same bank account may be accessed at the same time, at separate ATMs. This could lead to inconsistencies within the system. To overcome this, we decided we would implement a locking technique. To demonstrate both the data race and non data race we wanted to add a button in the options menu that toggled these modes on and off. The non-data race mode would utilise the lock we implemented and the non data race would not. We designed our system first, to minimise problems later on, deciding on 4 main classes; Home, ATM_Window, Account, Bank. This proved useful, however we still ran into problems.
 
+![home](screenshots/home.png)
+![multiple](screenshots/multiple.png)
+![money](screenshots/money.png)
+
 ## Problems and Solutions
 
 A problem faced when creating our ATM was adding the non-data race condition. Originally, when we tried to implement the non-race condition we added the lock into the ATM thread itself. This didn't work and it took us some time to realise that the lock should be within the account class instead. We then moved our function to decrease the account balance from the ATM window class to the account class and added the lock, which ended up fixing this error.
